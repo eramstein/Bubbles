@@ -1,0 +1,102 @@
+<style type="text/css">
+
+body{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-size:13px;
+	padding:25px 60px 60px 60px;
+	width: 800px;
+}
+
+.block{
+	padding-top:30px;
+}
+
+.block-title{
+	font-size:16px;
+	font-weight:bold;
+}
+
+li{
+	padding:5px;
+}
+
+#screenshots img{
+	float:left;
+	width:350px;
+	padding:10px;
+}
+
+</style>
+
+<div class="block">
+	<div class="block-title">
+		What is this chart showing ?
+	</div>
+	<div>
+		This is a sample of real estate sales in the city of Strasbourg in 2012. Each buble represents an appartement or a house.
+		<br>
+		It is just an example thrown together for this experiment - you could easily imagine other applications for such an interactive visualization, where the bubles would be countries, people or projects.
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-title">
+		What can I do with it ?
+	</div>	
+	<ul>
+		<li>Re-position the bubles across various dimensions: price, surface, district, etc... You can pick one or two of them, and based on the type of dimensions you picked the chart will adapt itself.
+			<br><img src="screen1.png">
+			<div id="screenshots">
+				<img src="screen6.png">
+				<img src="screen8.png">
+				<img src="screen9.png">
+				<img src="screen10.png">
+				<img src="screen11.png">
+			</div>
+		</li>
+		<li style="clear:both">Select how the bubles are colored.
+			<br><img src="screen2.png">
+		</li>
+		<li>Select how the bubles are sized.
+			<br><img src="screen3.png">
+		</li>
+		<li>For the selected dimensions, select the visualization type. It's usually list or a chart, but there could be several chart types in some cases.
+			<br><img src="screen4.png">
+		</li>
+		<li>Filter the bubles.
+			<br><img src="screen5.png">
+		</li>
+	</ul>	
+</div>
+
+<div class="block">
+	<div class="block-title">
+		What about these strange axis ?
+	</div>
+	<div>
+		In some charts the axis are used to show some statistical data. Inspired from E. Tufte.
+		<br><img src="screen7.png">
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-title">
+		What's the purpose of this thing ?
+	</div>
+	<div>
+		It's an experiment around the concept of object constancy. Object constancy ? I'll just say that it is about keeping things visually consistent and smoothly transionned while changing a chart's parameters (filters, analytical dimensions...). For a much better explanation, see <a href="http://vis.berkeley.edu/papers/animated_transitions/">this paper</a> from Jeffrey Heer and George Robertson.   
+
+		<br><br>
+
+		<a href="http://d3js.org/">d3.js</a> is a great way to achieve object constancy, with its enter(), update() and exit() pattern for mapping data to visual markers and its support for transitions. Look at this <a href="http://bl.ocks.org/mbostock/1256572">impressive demo</a> and these blog posts (<a href="http://bost.ocks.org/mike/constancy/">this</a> and <a href="http://bost.ocks.org/mike/transition/">that</a>) from Mike Bostock (d3's creator). While d3.js allows you to do such things with relatively little code, you will still have to develop a custom function for transitionning between 2 types of chart. It therefore doesn't scale well when the number of possibilities increases. In the approach I'm trying here, the constancy is ensured by the bubles: whatever chart type you select, the bubles will always be there - what changes is how they get positionned and some additionnal chart components such as axis, background bars or boxplots. It makes it much easier to develop since regardless of the combination of chart types involved in the transition, the same functions are used to move, color and size the bubles. The old additionnal components are simply removed and the new ones are added. A shortcoming of this is that it's not very suitable for aggregating quantitative values, for example total cost by district. But you can still do it for example by piling the bubles and make them a bit more squared to form a bar shape, or simply by drawing a shape in the background behind the bubles (to see an example, plot by district and price and select bars in the top right radio buttons).
+
+		<br><br>
+
+		Is the whole thing really useful ? I'm not sure, but it's interesting and was fun to do :-) <br>
+		The next step (on a difefrent topic) would be to rework the user interface for changing the chart parameters and make it a commandline interface: "plot by district and price, color by surface". The challenge will be to help the user type the query properly in a semi-formal language - we need something better than auto-complete here. 
+	</div>
+</div>
+
+<div class="block">
+	<b>Contact</b>: etienne.ramstein@gmail.com
+</div>

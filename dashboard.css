@@ -1,0 +1,256 @@
+/* GENERAL */
+body{
+    background-image:url("binding_dark.png");
+    background-repeat:repeat;
+    text-align: center;
+}
+
+* {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+table label{
+    margin-bottom:0 !important;
+    font-weight: normal !important;
+    font-size: 12px !important;
+}
+
+.btn, .form-control{
+    padding:2px 8px 2px 8px !important;
+}
+.form-control{
+    height: 26px !important;
+}
+
+input[type='file'] {
+  color: transparent;
+}
+
+#ui{
+  margin: 0 auto;
+  width:1260px;
+}
+
+#select-source{
+  margin: 0 auto;
+  width:1260px;
+  border:1px solid #888;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  z-index:99;
+  background-color:white;
+  height:655px;
+  padding-top:30px;
+  padding-left:60px;
+  text-align: left !important;
+}
+
+#top-margin{
+    height: -moz-calc((100% - 655px)/5);
+    height: -webkit-calc((100% - 655px)/5);
+    height: calc((100% - 655px)/5);
+}
+
+#ui-top{
+    border-left:1px solid #888;
+    border-top:1px solid #888;
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-left-radius: 4px;
+    height:95px;
+    padding-left:40px;
+    padding-top:15px;
+    padding-bottom:15px;
+    width:1041px;
+    background-image:url("sos.png");
+    background-repeat:repeat;
+}
+
+#ui-logo{
+  border-top:1px solid #888;
+  border-right:1px solid #888;
+  border-left:1px solid #888;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
+  width:201px;
+  height:95px;
+  background-image:url("sos.png");
+  background-repeat:repeat;
+}
+
+#ui-filter-container{
+    border-right:1px solid #888;
+    border-top:1px solid #888;
+    border-bottom:1px solid #888;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-bottom-right-radius: 4px;
+    width:200px;
+    padding:5px 20px 0px 20px;
+    background-image:url("sos.png");
+    background-repeat:repeat;
+    height:560px;
+    overflow-y:auto;
+}
+
+#filter-by-marking a{
+    font-size:12px;
+}
+
+#filter-by-marking label{
+    margin-bottom:0px;
+}
+
+
+#chart_container{
+  background-color: white;
+  border:1px solid #888;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
+  overflow: auto;
+  height:560px;
+}
+
+.listtable{
+    position:absolute;
+    top:157px;
+    left:250px;
+}
+.listtable td{
+    height:40px;
+}
+.listtable td, .listtable th{
+    padding-right:20px;
+    border-bottom:1px solid #cccccc;
+}
+.tableBubleCell{
+    width:50px;
+}
+.show{
+}
+.hide{
+    display:none;
+}
+
+/* Marking */
+
+.marquee {
+    fill-opacity:0.2;
+    stroke:#000;
+    stroke-dasharray:2,4;
+    vector-effect:non-scaling-stroke; /* not for FF */
+}
+
+.selected {
+  stroke-width: 2 !important;
+  fill-opacity: 1 !important;
+}
+
+/* UI */
+.table-checks td{
+    padding-top: 2px !important;
+    padding-bottom: 4px !important;
+}
+.filterTitle{
+  font-weight: bold;
+  margin-bottom:3px;
+}
+.filter-range{
+  width:70px;
+}
+.filter-block{
+  margin-bottom:10px;
+}
+.filter-box {
+    margin-right:5px !important;
+}
+.paramTitle{
+    font-weight: bold;
+    float:left;
+    padding-right:15px;
+    padding-top:2px;
+}
+.btn-first {
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px  !important;
+}
+.btn.nohover {
+    background-color: #F5F5F5;
+    color: #333333;
+    background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
+    text-decoration: none;
+    background-position: 0;
+    transition: none;
+}
+
+.btn:not(.active):hover {
+    color:black;
+}
+.btn:not(.active) {
+    color:black ! important;
+}
+
+/* CHART */
+
+.buble {
+  stroke: #000;
+}
+
+
+.buble:hover {
+  stroke-width: 2 !important;
+}
+
+.listRow{
+  fill:#333;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text, #legend text {
+    fill: #333333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size:12px;
+}
+
+.axis line {
+    stroke: #333333;
+}
+
+
+
+/* TOOLTIP */
+
+.tooltipp
+{
+  z-index: 999;
+  width: 230px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  opacity: 1;
+  background-color: #ddd;
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,0));
+  background-image: -moz-linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,0));
+  background-image: -ms-linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,0));
+  background-image: -o-linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,0));
+  background-image: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,0));
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.5) inset;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.5) inset;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.5) inset;
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+  color:#333;
+}

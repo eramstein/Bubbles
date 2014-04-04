@@ -1,0 +1,133 @@
+<!-- Copyright (C) 2014  Etienne Ramstein
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/> -->
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Bubble Charts</title>
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="dashboard.css"/>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="d3.js"></script>
+    <script type="text/javascript" src="dashboard.js"></script>
+    <script type="text/javascript" src="marking.js"></script>
+    <script type="text/javascript" src="scatterplot.js"></script>
+    <script type="text/javascript" src="bublechart.js"></script>
+    <script type="text/javascript" src="donut.js"></script>
+    <script type="text/javascript" src="boxplot.js"></script>
+    <script type="text/javascript" src="barchart.js"></script>
+    <script type="text/javascript" src="sumbarchart.js"></script>
+    <script type="text/javascript" src="list.js"></script>
+    <script type="text/javascript" src="commonChartElements.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <link rel="stylesheet" href="slider.css">
+    <script src="jQRangeSlider-min.js"></script>
+</head>
+<body>
+<div id="top-margin"><br></div>
+<div id="ui">
+    <div id="ui-top" style="float:left">
+        <div style="text-align:left">
+            <div class="paramTitle" style="padding-right:21px">Plot By</div>
+            <div id="ui-dimensions" class="btn-group">
+            </div>
+        </div>
+        <div style="clear:left;padding-top:10px;">
+            <div style="float:left">
+                <div class="paramTitle">View As</div>
+                    <div class="btn-group" id="chart-types">
+                    <div class='btn btn-primary radio-viewtype nohover active' id="radio-viewtype-scatterplot" onclick="changeView(this, 'scatterplot')">Scatterplot</div>
+                    <div class='btn btn-primary radio-viewtype nohover' id="radio-viewtype-bublechart" style="display:none" onclick="changeView(this, 'bublechart')">Blobs</div>
+                    <div class='btn btn-primary radio-viewtype nohover' id="radio-viewtype-barchart" style="display:none" onclick="changeView(this, 'barchart')">Bars</div>
+                    <div class='btn btn-primary radio-viewtype nohover' id="radio-viewtype-boxplot" style="display:none" onclick="changeView(this, 'boxplot')">Boxplots</div>
+                    <div class='btn btn-primary radio-viewtype nohover' id="radio-viewtype-sumbarchart" style="display:none" onclick="changeView(this, 'sumbarchart')">Bars</div>
+                    <div class='btn btn-primary radio-viewtype nohover' id="radio-viewtype-donut" style="display:none" onclick="changeView(this, 'donut')">Donut</div>
+                    <div class='btn btn-primary radio-viewtype nohover' id="radio-viewtype-list" onclick="changeView(this, 'list')">List</div>
+                </div>
+            </div>
+            <div class="paramTitle"  style="float:left;padding-left:20px">Color By</div>
+            <div style="float:left">
+                <select id="ui-color" class="ui-color ui-select form-control"></select>
+            </div>
+            <div class="paramTitle" style="padding-left:15px">Size By</div>
+            <div style="float:left">
+                <select id="ui-size" class="ui-size ui-select form-control"></select>
+            </div>
+        </div>
+    </div>
+    <div id="ui-logo" style="float:left">
+        <h3>Bubble Charts</h3>
+        <a href="help.html" style="margin-right:20px">Help</a>
+        <a onclick="selectDatasource()" style="cursor:pointer">Use My Data</a>
+    </div>
+    <div id="chart_container" style="clear:both;float:left;"></div>
+    <div id="ui-filter-container"  style="float:left;" title="Click bubbles to mark them">
+        <div id="ui-filter"></div>
+        <div id="filter-by-marking">
+            <label for="checkbox-filter-marked">
+                <input id="checkbox-filter-marked"  name="checkbox-filter-marked" type="checkbox" onchange="filterForMarked()" />
+                Show marked only
+            </label>
+            <a onclick="unmarkAll()" style="cursor:pointer">Unmark all</a>
+        </div>
+    </div>
+
+</div>
+
+<div id="tooltip" class="tooltipp" style="display:none">
+</div>
+
+<div id="select-source" style="display:none;">
+
+  <h2>Option 1: From a CSV or TSV file on your computer</h2>
+  <div>
+      <input type='file' onchange="reloadDataFromLocalFile(this);"/>
+  </div>
+  <br>
+
+  <h2>Option 2: From a remote file on the web</h2>
+  <div>
+    <span>Enter URL of a CSV or TSV file:</span> <input id="data_source_txt" type="text">
+    <button onclick="reloadData($('#data_source_txt').val())">Load</button>
+    <br>
+    <b>NB</b>: this will not work if the server hosting the file doesn't allow <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">cross origin resource sharing</a>.
+  </div>
+  <br>
+
+  <h4>Some explanations</h4>
+  <div>
+    CSV stands for Comma Separated Values. See an example <a target="_blank" href="data2.csv">here</a>.
+    <br>
+    TSV stands for Tab Separated Values. It's useful if you have commas already in your data. See an example <a target="_blank" href="data.tsv">here</a>.
+    <br>
+    You can generate one with a text editor, or with a spreadsheet software like Excel by saving as CSV or TSV.
+  </div>
+  <br>
+
+  <h4>Notes for developers</h4>
+  <div>
+    The remote CSV file option doesn't have to be an actual file. If you have a RESTful web service returning CSV output you can point to its URL.<br>
+    Also note that the target URL will be added to the hash of the page, so if you have a data API you can create dynamics links to this tool to visually explore results of a data query. JSON might be better than CSV for this, I'll work on it is there is demand.
+  </div>
+
+  <br><br><br>
+  <button onclick="selectDatasource()">Cancel</button>
+</div>
+
+</body>
+</html>
+
